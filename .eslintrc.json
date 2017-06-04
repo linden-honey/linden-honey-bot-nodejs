@@ -1,0 +1,42 @@
+{
+    "env": {
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "script"
+    },
+    "rules": {
+        "no-console": [
+            "off"
+        ],
+        "indent": [
+            "warn",
+            4
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "warn",
+            "never"
+        ],
+        "no-undef": [
+            "error"
+        ],
+        "eqeqeq": [
+            "error",
+            "always", {
+                "null": "ignore"
+            }
+        ],
+        "space-before-blocks": [
+            "warn"
+        ],
+        "space-infix-ops": [
+            "warn"
+        ]
+    }
+}
