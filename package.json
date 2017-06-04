@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/alebabai/linden-honey-bot/issues"
   },
-  "homepage": "https://github.com/alebabai/linden-honey-bot#readme"
+  "homepage": "https://github.com/alebabai/linden-honey-bot#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }

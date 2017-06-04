@@ -1,13 +1,17 @@
 {
+    "extends": "eslint:recommended",
     "env": {
         "node": true
     },
-    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "script"
     },
     "rules": {
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
         "no-console": [
             "off"
         ],
@@ -28,7 +32,8 @@
         ],
         "eqeqeq": [
             "error",
-            "always", {
+            "always",
+            {
                 "null": "ignore"
             }
         ],
