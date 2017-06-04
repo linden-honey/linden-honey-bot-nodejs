@@ -1,7 +1,7 @@
 {
   "name": "linden-honey-bot",
   "version": "1.0.0",
-  "description": "Telegram bot on the top of Linden Honey REST API",
+  "description": "Telegram bot built on top of Linden Honey REST API",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
