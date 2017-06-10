@@ -21,6 +21,6 @@ server.use(logger())
 server.use(bodyParser())
 server.use(telegramRouter.middleware())
 
-server.listen(config.get('APP:PORT'), () => {
-    console.log(`${config.get('APP:NAME')} application started!`)
+server.listen(config.get('LINDEN_HONEY:APP:PORT'), () => {
+    console.log(`${config.get('LINDEN_HONEY:APP:NAME')} application started!`)
 })
