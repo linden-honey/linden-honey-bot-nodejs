@@ -11,7 +11,7 @@ nconf
         search: true
     })
     .defaults({
-        LINDEN_HONEY: {
+        LH: {
             APP: {
                 NAME: 'Linden Honey Bot',
                 PORT: process.env.PORT || 8080
@@ -20,8 +20,8 @@ nconf
     })
 
 nconf.required([
-    'LINDEN_HONEY:APP:TELEGRAM:BOT:TOKEN',
-    'LINDEN_HONEY:LB:BASE_URL'
+    'LH:APP:TELEGRAM:BOT:TOKEN',
+    'LH:LB:BASE_URL'
 ])
 
 module.exports = nconf
