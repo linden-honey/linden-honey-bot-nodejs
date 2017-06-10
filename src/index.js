@@ -17,11 +17,10 @@ const telegramRouter = Router({ prefix: PATH.API_TELEGRAM })
 telegramRouter
     .post('/updates', telegramController.handleUpdate)
 
-server.name = config.get('APP:PORT')
 server.use(logger())
 server.use(bodyParser())
 server.use(telegramRouter.middleware())
 
-server.listen(process.env.PORT || config.get('APP:PORT') || 8080, () => {
-    console.log(`${server.name} application started!`)
+server.listen(config.get('APP:PORT'), () => {
+    console.log(`${config.get('APP:NAME')} application started!`)
 })

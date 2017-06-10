@@ -13,13 +13,11 @@ nconf
     .defaults({
         APP: {
             NAME: 'Linden Honey Bot',
-            PORT: 8080
+            PORT: process.env.PORT || 8080
         }
     })
 
 nconf.required([
-    'APP:NAME',
-    'APP:PORT',
     'APP:LB:BASE_URL',
     'APP:TELEGRAM:BOT:TOKEN'
 ])
