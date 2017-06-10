@@ -132,3 +132,7 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/node,webstorm,visualstudiocode
+
+### Other
+
+linden_honey_config.json
