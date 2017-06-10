@@ -21,7 +21,7 @@ nconf
 
 nconf.required([
     'LH:APP:TELEGRAM:BOT:TOKEN',
-    'LH:LB:BASE_URL'
+    'LH:LB:URL'
 ])
 
 module.exports = nconf

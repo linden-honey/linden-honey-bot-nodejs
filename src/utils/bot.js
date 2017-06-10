@@ -3,7 +3,7 @@ const config = require('./config')
 const { PATH } = require('./constants')
 
 const bot = module.exports = new Telegraf(config.get('LH:APP:TELEGRAM:BOT:TOKEN'))
-const webhookUrl = `${config.get('LH:LB:BASE_URL')}${PATH.API_TELEGRAM}/updates`
+const webhookUrl = `${config.get('LH:LB:URL')}${PATH.API_TELEGRAM}/updates`
 
 bot.telegram.setWebhook(webhookUrl)
 
