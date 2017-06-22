@@ -1,1 +1,1 @@
-exports.PATH = require('./path-constants')
+exports.PATH = require('./path')

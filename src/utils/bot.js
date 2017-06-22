@@ -12,11 +12,17 @@ module.exports = class Bot {
     }
 
     init() {
-        this.telegraf.command('say', ctx => {
-            this.api.getRandomQuote()
-                .then(res => res.data)
-                .then(quote => ctx.reply(quote.phrase))
+        this.telegraf.command('lenin', async ctx => {
+            const songs = await this.api.findSongs('Песня о Ленине')
+            const quote = songs[0] && await this.api.getRandomQuoteFromSong(songs[0]._id)
+            ctx.reply(quote.phrase)
         })
+
+        this.telegraf.command('say', async ctx => {
+            const quote = await this.api.getRandomQuote()
+            ctx.reply(quote.phrase)
+        })
+
     }
 
     set webhook(webhookUrl) {
