@@ -1,12 +1,29 @@
 const Telegraf = require('telegraf')
-const config = require('./config')
-const { PATH } = require('./constants')
+const Api = require('./api')
 
-const bot = module.exports = new Telegraf(config.get('LH:APP:TELEGRAM:BOT:TOKEN'))
-const webhookUrl = `${config.get('LH:LB:URL')}${PATH.API_TELEGRAM}/updates`
+module.exports = class Bot {
+    constructor({ dataUrl, token, webhookUrl }) {
+        this.telegraf = new Telegraf(token)
+        this.api = new Api({
+            baseUrl: dataUrl
+        })
+        this.init()
+        this.webhook = webhookUrl
+    }
 
-bot.telegram.setWebhook(webhookUrl)
+    init() {
+        this.telegraf.command('say', ctx => {
+            this.api.getRandomQuote()
+                .then(res => res.data)
+                .then(quote => ctx.reply(quote.phrase))
+        })
+    }
 
-bot.hears([/ключ/i, /границ/i, /пополам/i, /всё/i, /план/i, /идёт/i], ctx => {
-    ctx.replyWithSticker('CAADAgAD0wQAAu75nwV1MhAIlGmvlwI')
-})
+    set webhook(webhookUrl) {
+        this.telegraf.telegram.setWebhook(webhookUrl)
+    }
+
+    handleUpdate(update, webhookResponse) {
+        this.telegraf.handleUpdate(update, webhookResponse)
+    }
+}

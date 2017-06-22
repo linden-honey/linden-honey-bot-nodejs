@@ -1,3 +1,3 @@
 exports.constants = require('./constants')
-exports.bot = require('./bot')
+exports.Bot = require('./bot')
 exports.config = require('./config')
