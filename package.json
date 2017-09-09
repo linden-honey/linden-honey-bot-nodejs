@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src",
-    "debug": "node --inspect"
+    "debug": "node --inspect src"
   },
   "repository": {
     "type": "git",

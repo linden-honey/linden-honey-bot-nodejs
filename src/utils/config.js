@@ -5,8 +5,8 @@ nconf
     .env({
         separator: '_'
     })
-    .file('local', {
-        file: 'linden_honey_config.json',
+    .file('file-config', {
+        file: 'linden_honey.json',
         dir: 'config',
         search: true
     })
@@ -20,6 +20,7 @@ nconf
     })
 
 nconf.required([
+    'LH:APP:API:URL',
     'LH:APP:TELEGRAM:BOT:TOKEN',
     'LH:LB:URL'
 ])
