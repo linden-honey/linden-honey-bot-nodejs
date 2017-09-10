@@ -29,6 +29,8 @@ Telegram bot built on top of Linden Honey REST API
 
 ## Usage
 
+### Local
+
 The following environment variables should be exported before running or you can create file `config/linden_honey.json` with the same structure:
 * `LH_APP_API_URL`
 * `LH_APP_TELEGRAM_BOT_TOKEN`
