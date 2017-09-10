@@ -36,7 +36,7 @@ The following environment variables should be exported before running or you can
 * `LH_APP_TELEGRAM_BOT_TOKEN`
 * `LH_LB_URL`
 
-Start application.
+Start application:
 ```
 yarn start
 ```
