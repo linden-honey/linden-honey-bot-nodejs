@@ -1,18 +1,20 @@
 const Koa = require('koa')
 const logger = require('koa-logger')
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 
-const { Bot, config }  = require('./utils')
+const { Api, Bot, config }  = require('./utils')
 const { PATH } = require('./utils/constants')
 const { telegramController } = require('./controllers')
 
 const server = module.exports = new Koa()
 
 server.context.bot = new Bot({
-    dataUrl: config.get('LH:APP:API:URL'),
     token: config.get('LH:APP:TELEGRAM:BOT:TOKEN'),
-    webhookUrl: `${config.get('LH:LB:URL')}${PATH.API_TELEGRAM}/updates`
+    webhookUrl: `${config.get('LH:LB:URL')}${PATH.API_TELEGRAM}/updates`,
+    dependencies: {
+        api: new Api({ baseUrl: config.get('LH:APP:API:URL')})
+    }
 })
 server.context.config = config
 

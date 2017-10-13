@@ -1,12 +1,10 @@
 const Telegraf = require('telegraf')
-const Api = require('./api')
+
 
 module.exports = class Bot {
-    constructor({ dataUrl, token, webhookUrl }) {
+    constructor({ token, webhookUrl, dependencies: { api } }) {
         this.telegraf = new Telegraf(token)
-        this.api = new Api({
-            baseUrl: dataUrl
-        })
+        this.api = api
         this.init()
         this.webhook = webhookUrl
     }
