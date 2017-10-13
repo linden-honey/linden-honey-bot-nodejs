@@ -1,0 +1,11 @@
+<b>{{title}}</b>
+
+<b>Автор:</b> {{author}}
+<b>Альбом:</b> {{album}}
+
+{{#each verses}}
+    {{#each quotes}}
+    {{phrase}}
+    {{/each}}
+    {{#unless @last}}{{/unless}}
+{{/each}}

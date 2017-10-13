@@ -2,9 +2,10 @@ const Telegraf = require('telegraf')
 
 
 module.exports = class Bot {
-    constructor({ token, webhookUrl, dependencies: { api } }) {
+    constructor({ token, webhookUrl, dependencies: { api, templateEngine } }) {
         this.telegraf = new Telegraf(token)
         this.api = api
+        this.templateEngine = templateEngine
         this.init()
         this.webhook = webhookUrl
     }
@@ -19,6 +20,12 @@ module.exports = class Bot {
         this.telegraf.command('say', async ctx => {
             const quote = await this.api.getRandomQuote()
             ctx.reply(quote.phrase)
+        })
+
+        this.telegraf.command('anthem', async ctx => {
+            const song = await this.api.getRandomSong()
+            const html = await this.templateEngine.render('song', song)
+            ctx.reply(html, { parse_mode: 'HTML' })
         })
 
     }
