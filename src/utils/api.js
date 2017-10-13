@@ -7,12 +7,20 @@ module.exports = class Api {
         })
     }
 
-    findSongs(title) {
-        return this.axios.get('/songs', {
-            params: {
-                search: title
-            }
-        })
+    findSongsByTitle(title) {
+        return this.axios
+            .get('/songs/search/by-title', { params: { title } })
+            .then(res => res.data)
+    }
+
+    findSongsByPhrase(phrase) {
+        return this.axios
+            .get('/songs/search/by-phrase', { params: { phrase } })
+            .then(res => res.data)
+    }
+
+    getRandomSong() {
+        return this.axios.get('/songs/search/random')
             .then(res => res.data)
     }
 
@@ -22,17 +30,7 @@ module.exports = class Api {
     }
 
     getRandomQuote() {
-        return this.axios.get('/quotes/random')
-            .then(res => res.data)
-    }
-
-    getRandomQuoteFromVerse(verseId) {
-        return this.axios.get(`/verses/${verseId}/quotes/random`)
-            .then(res => res.data)
-    }
-
-    getRandomQuoteFromSong(songId) {
-        return this.axios.get(`/songs/${songId}/quotes/random`)
+        return this.axios.get('/quotes/search/random')
             .then(res => res.data)
     }
 }
