@@ -11,7 +11,7 @@ module.exports = class Bot {
 
     init() {
         this.telegraf.command('lenin', async ctx => {
-            const songs = await this.api.findSongs('Песня о Ленине')
+            const songs = await this.api.findSongsByTitle('Песня о Ленине')
             const quote = songs[0] && await this.api.getRandomQuoteFromSong(songs[0]._id)
             ctx.reply(quote.phrase)
         })
