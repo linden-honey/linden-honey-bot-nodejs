@@ -33,4 +33,9 @@ module.exports = class Api {
         return this.axios.get('/quotes/search/random')
             .then(res => res.data)
     }
+
+    getRandomQuoteFromSong(songId) {
+        return this.axios.get(`/songs/${songId}/quotes/search/random`)
+            .then(res => res.data)
+    }
 }
