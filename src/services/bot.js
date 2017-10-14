@@ -1,9 +1,9 @@
 const Telegraf = require('telegraf')
 
-
 module.exports = class Bot {
-    constructor({ token, webhookUrl, dependencies: { api, templateEngine } }) {
+    constructor({ token, webhookUrl, help, dependencies: { api, templateEngine } }) {
         this.telegraf = new Telegraf(token)
+        this.help = help
         this.api = api
         this.templateEngine = templateEngine
         this.init()
@@ -11,6 +11,17 @@ module.exports = class Bot {
     }
 
     init() {
+        this.telegraf.command('help', async ctx => {
+            const html = await this.templateEngine.render('help.html', this.help)
+            ctx.reply(html, { parse_mode: 'HTML' })
+        })
+
+        this.telegraf.command('anthem', async ctx => {
+            const song = await this.api.getRandomSong()
+            const html = await this.templateEngine.render('song.html', song)
+            ctx.reply(html, { parse_mode: 'HTML' })
+        })
+
         this.telegraf.command('lenin', async ctx => {
             const songs = await this.api.findSongsByTitle('Песня о Ленине')
             const quote = songs[0] && await this.api.getRandomQuoteFromSong(songs[0]._id)
@@ -20,12 +31,6 @@ module.exports = class Bot {
         this.telegraf.command('say', async ctx => {
             const quote = await this.api.getRandomQuote()
             ctx.reply(quote.phrase)
-        })
-
-        this.telegraf.command('anthem', async ctx => {
-            const song = await this.api.getRandomSong()
-            const html = await this.templateEngine.render('song.html', song)
-            ctx.reply(html, { parse_mode: 'HTML' })
         })
 
         this.telegraf.on('inline_query', async ctx => {
