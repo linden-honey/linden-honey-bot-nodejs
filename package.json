@@ -26,12 +26,6 @@
     "url": "https://github.com/alebabai/linden-honey-bot/issues"
   },
   "homepage": "https://github.com/alebabai/linden-honey-bot#readme",
-  "devDependencies": {
-    "eslint": "^4.8.0"
-  },
-  "engines": {
-    "node": "8.7.0"
-  },
   "dependencies": {
     "axios": "^0.16.2",
     "handlebars": "^4.0.10",
@@ -41,5 +35,11 @@
     "koa-router": "^7.2.0",
     "nconf": "^0.8.4",
     "telegraf": "^3.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  },
+  "engines": {
+    "node": "8.7.0"
   }
 }
