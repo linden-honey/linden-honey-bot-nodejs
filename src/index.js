@@ -3,7 +3,8 @@ const logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 
-const { Api, Bot, config, TemplateEngine }  = require('./utils')
+const { config }  = require('./utils')
+const { Api, Bot, TemplateEngine } = require('./services')
 const { PATH } = require('./utils/constants')
 const { telegramController } = require('./controllers')
 
