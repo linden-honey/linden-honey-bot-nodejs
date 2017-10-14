@@ -15,6 +15,11 @@ nconf
             APP: {
                 NAME: 'Linden Honey Bot',
                 PORT: process.env.PORT || 8080
+            },
+            TELEGRAM: {
+                BOT: {
+                    COMMANDS: {}
+                }
             }
         }
     })
