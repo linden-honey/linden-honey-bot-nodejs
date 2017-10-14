@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/alebabai/linden-honey-bot#readme",
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "^4.8.0"
   },
   "engines": {
-    "node": "8.0.0"
+    "node": "8.7.0"
   },
   "dependencies": {
     "axios": "^0.16.2",

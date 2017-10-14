@@ -7,15 +7,15 @@ module.exports = class Api {
         })
     }
 
-    findSongsByTitle(title) {
+    findSongsByTitle(title, options = {}) {
         return this.axios
-            .get('/songs/search/by-title', { params: { title } })
+            .get('/songs/search/by-title', { params: { title, ...options } })
             .then(res => res.data)
     }
 
-    findSongsByPhrase(phrase) {
+    findSongsByPhrase(phrase, options = {}) {
         return this.axios
-            .get('/songs/search/by-phrase', { params: { phrase } })
+            .get('/songs/search/by-phrase', { params: { phrase, ...options } })
             .then(res => res.data)
     }
 
