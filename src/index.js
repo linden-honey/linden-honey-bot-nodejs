@@ -14,6 +14,7 @@ const HELP_CONFIG = config.get('LH:APP:TELEGRAM:BOT:HELP')
 const help = {
     caption: HELP_CONFIG.CAPTION,
     commands: Object.keys(HELP_CONFIG.COMMANDS)
+        .sort((k1, k2) => k1.localeCompare(k2))
         .map(key => ({
             name: key.toLowerCase(),
             description: HELP_CONFIG.COMMANDS[key]
