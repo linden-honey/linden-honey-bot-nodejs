@@ -1,9 +1,9 @@
 const Telegraf = require('telegraf')
 
 module.exports = class Bot {
-    constructor({ token, webhookUrl, help, dependencies: { api, templateEngine } }) {
+    constructor({ token, webhookUrl, commands, dependencies: { api, templateEngine } }) {
         this.telegraf = new Telegraf(token)
-        this.help = help
+        this.commands = commands
         this.api = api
         this.templateEngine = templateEngine
         this.init()
@@ -11,14 +11,23 @@ module.exports = class Bot {
     }
 
     init() {
-        this.telegraf.command('help', async ctx => {
-            const html = await this.templateEngine.render('help.html', this.help)
-            ctx.reply(html, { parse_mode: 'HTML' })
-        })
-
         this.telegraf.command('anthem', async ctx => {
             const song = await this.api.getRandomSong()
             const html = await this.templateEngine.render('song.html', song)
+            ctx.reply(html, { parse_mode: 'HTML' })
+        })
+
+        this.telegraf.command('help', async ctx => {
+            const help = {
+                caption: this.commands.HELP.DESCRIPTION,
+                commands: Object.keys(this.commands)
+                    .sort((k1, k2) => k1.localeCompare(k2))
+                    .map(key => ({
+                        name: key.toLowerCase(),
+                        description: this.commands[key].DESCRIPTION
+                    }))
+            }
+            const html = await this.templateEngine.render('help.html', help)
             ctx.reply(html, { parse_mode: 'HTML' })
         })
 
@@ -31,6 +40,14 @@ module.exports = class Bot {
         this.telegraf.command('say', async ctx => {
             const quote = await this.api.getRandomQuote()
             ctx.reply(quote.phrase)
+        })
+
+        this.telegraf.command('start', async ctx => {
+            ctx.replyWithSticker(this.commands.START.STICKER)
+        })
+
+        this.telegraf.command('stop', async ctx => {
+            ctx.replyWithSticker(this.commands.STOP.STICKER)
         })
 
         this.telegraf.on('inline_query', async ctx => {
