@@ -24,7 +24,7 @@ module.exports = class Bot {
 
         this.telegraf.command('anthem', async ctx => {
             const song = await this.api.getRandomSong()
-            const html = await this.templateEngine.render('song', song)
+            const html = await this.templateEngine.render('song.html', song)
             ctx.reply(html, { parse_mode: 'HTML' })
         })
 
@@ -41,7 +41,7 @@ module.exports = class Bot {
                     type: 'article',
                     title: song.title,
                     input_message_content: {
-                        message_text: await this.templateEngine.render('song', song),
+                        message_text: await this.templateEngine.render('song.html', song),
                         parse_mode: 'HTML'
                     }
                 }))
