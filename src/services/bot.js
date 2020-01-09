@@ -58,9 +58,12 @@ class Bot {
         })
 
         const leninMiddleware = async (ctx) => {
-            const songs = await this.api.findSongsByTitle('Песня о Ленине')
-            const quote = songs[0] && await this.api.getRandomQuoteFromSong(songs[0]._id)
-            ctx.reply(quote.phrase)
+            const { data } = await this.api.findSongsByTitle('Песня о Ленине')
+            const song = data && data[0]
+            if (song) {
+                const { phrase } = await this.api.getRandomQuoteFromSong(song._id)
+                ctx.reply(phrase)
+            }
         }
         this.telegraf.command('lenin', leninMiddleware)
         this.telegraf.hears(/.*ленин.*/i, leninMiddleware)
@@ -81,11 +84,11 @@ class Bot {
         this.telegraf.on('inline_query', async (ctx) => {
             const limit = 20
             const offset = Number.parseInt(ctx.inlineQuery.offset, 10) || 0
-            const previews = await this.api.findSongsByPhrase(
+            const { data } = await this.api.findSongsByPhrase(
                 ctx.inlineQuery.query,
                 { offset, limit },
             )
-            const songs = await Promise.all(previews.map(({ _id }) => this.api.getSong(_id)))
+            const songs = await Promise.all(data.map(({ _id }) => this.api.getSong(_id)))
             const results = await Promise.all(
                 songs.map(async (song) => ({
                     id: song._id,
