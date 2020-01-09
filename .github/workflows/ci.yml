@@ -6,6 +6,7 @@ on:
 
 jobs:
   pipeline:
+    name: Pipeline
     runs-on: ubuntu-latest
     strategy:
       matrix:
