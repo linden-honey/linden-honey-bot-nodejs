@@ -1,33 +1,37 @@
-const nconf = require('nconf')
+const getEnv = (key, defaultValue) => {
+    if (key === undefined) {
+        throw new Error("Missing 'key' argument!")
+    }
+    const hasValue = process.env[key] !== undefined
+    if (!hasValue && defaultValue === undefined) {
+        throw new Error(`"${key}" is required!`)
+    }
+    return hasValue ? process.env[key] : defaultValue
+}
 
-nconf
-    .argv()
-    .env({
-        separator: '_'
-    })
-    .file('file-config', {
-        file: 'linden_honey.json',
-        dir: 'config',
-        search: true
-    })
-    .defaults({
-        LH: {
-            APP: {
-                NAME: 'Linden Honey Bot',
-                PORT: process.env.PORT || 8080
+const config = {
+    application: {
+        rest: {
+            basePath: getEnv('APPLICATION_REST_BASE_PATH', '/api'),
+        },
+        api: {
+            baseUrl: getEnv('APPLICATION_API_BASE_URL'),
+        },
+        telegram: {
+            bot: {
+                token: getEnv('APPLICATION_TELEGRAM_BOT_TOKEN'),
             },
-            TELEGRAM: {
-                BOT: {
-                    COMMANDS: {}
-                }
-            }
-        }
-    })
+        },
+    },
+    server: {
+        port: getEnv('SERVER_PORT', 8080),
+        loadBalancer: {
+            url: getEnv('SERVER_LOAD_BALANCER_URL'),
+        },
+    },
+}
 
-nconf.required([
-    'LH:APP:API:URL',
-    'LH:APP:TELEGRAM:BOT:TOKEN',
-    'LH:LB:URL'
-])
-
-module.exports = nconf
+module.exports = {
+    getEnv,
+    config: Object.freeze(config),
+}
