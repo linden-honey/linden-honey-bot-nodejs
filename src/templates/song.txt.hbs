@@ -1,7 +1,7 @@
 {{title}}
 
-Автор: {{author}}
-Альбом: {{album}}
+Автор: {{#if author}}{{author}}{{else}}неизвестен{{/if}}
+Альбом: {{#if album}}{{album}}{{else}}неизвестен{{/if}}
 
 {{#each verses}}
 {{#each quotes}}
