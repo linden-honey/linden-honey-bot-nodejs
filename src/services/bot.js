@@ -61,7 +61,7 @@ class Bot {
             const { data } = await this.api.findSongsByTitle('Песня о Ленине')
             const song = data && data[0]
             if (song) {
-                const { phrase } = await this.api.getRandomQuoteFromSong(song._id)
+                const { phrase } = await this.api.getRandomQuoteFromSong(song.id)
                 ctx.reply(phrase)
             }
         }
@@ -88,10 +88,10 @@ class Bot {
                 ctx.inlineQuery.query,
                 { offset, limit },
             )
-            const songs = await Promise.all(data.map(({ _id }) => this.api.getSong(_id)))
+            const songs = await Promise.all(data.map(({ id }) => this.api.getSong(id)))
             const results = await Promise.all(
                 songs.map(async (song) => ({
-                    id: song._id,
+                    id: song.id,
                     type: 'article',
                     title: song.title,
                     input_message_content: {
