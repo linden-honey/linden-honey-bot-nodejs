@@ -1,7 +1,7 @@
 const express = require('express')
 require('express-async-errors')// patch to support promise rejection
 
-const { config } = require('./utils/config')
+const config = require('./utils/config')
 
 const {
     Api,
