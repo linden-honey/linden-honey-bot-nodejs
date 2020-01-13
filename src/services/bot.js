@@ -110,9 +110,7 @@ class Bot {
         this.telegraf.telegram.setWebhook(webhookUrl)
     }
 
-    handleUpdate = (update, webhookResponse) => {
-        return this.telegraf.handleUpdate(update, webhookResponse)
-    }
+    handleUpdate = (update, webhookResponse) => this.telegraf.handleUpdate(update, webhookResponse)
 }
 
 module.exports = Bot
