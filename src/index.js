@@ -20,11 +20,11 @@ const { Router } = express
 /**
  * Declare telegram routes
  */
-const telegramSecretSeed = Date.now()
+const telegramBotWebhookSecret = config.application.telegram.bot.webhookSecret
 const telegramController = new TelegramController({
     bot: new Bot({
         token: config.application.telegram.bot.token,
-        webhookUrl: `${config.server.loadBalancer.url}/api/telegram/updates/${telegramSecretSeed}`,
+        webhookUrl: `${config.server.loadBalancer.url}/api/telegram/updates/${telegramBotWebhookSecret}`,
         dependencies: {
             api: new Api({
                 baseUrl: config.application.api.baseUrl,
@@ -34,7 +34,7 @@ const telegramController = new TelegramController({
     }),
 })
 const telegramRouter = new Router()
-    .post(`/updates/${telegramSecretSeed}`, telegramController.handleUpdate)
+    .post(`/updates/${telegramBotWebhookSecret}`, telegramController.handleUpdate)
 
 /**
  * Declare API routes

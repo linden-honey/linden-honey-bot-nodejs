@@ -10,6 +10,7 @@ const config = {
         },
         telegram: {
             bot: {
+                webhookSecret: getEnv('APPLICATION_TELEGRAM_BOT_WEBHOOK_SECRET', Date.now()),
                 token: getEnv('APPLICATION_TELEGRAM_BOT_TOKEN'),
             },
         },

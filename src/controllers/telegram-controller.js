@@ -6,8 +6,13 @@ class TelegramController {
     handleUpdate = async (req, res) => {
         if (req.is('json')) {
             const { body } = req
-            this.bot.handleUpdate(body, res)
-            res.status(201).send('Telegram update has been successfully handled')
+            try {
+                await this.bot.handleUpdate(body, res)
+            } catch (e) {
+                const message = 'Error during update handling'
+                console.error(message, e)
+                res.status(500).send(message)
+            }
         } else {
             res.status(415).send('Incorrect update format')
         }

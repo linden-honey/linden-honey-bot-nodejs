@@ -111,7 +111,7 @@ class Bot {
     }
 
     handleUpdate = (update, webhookResponse) => {
-        this.telegraf.handleUpdate(update, webhookResponse)
+        return this.telegraf.handleUpdate(update, webhookResponse)
     }
 }
 
