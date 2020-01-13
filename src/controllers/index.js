@@ -1,1 +1,1 @@
-exports.telegramController = require('./telegram-controller')
+exports.TelegramController = require('./telegram-controller')

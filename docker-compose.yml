@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app:
+    image: lindenhoney/linden-honey-bot:latest
+    build: .
+    environment:
+      APPLICATION_API_BASE_URL: ${APPLICATION_API_BASE_URL}
+      APPLICATION_TELEGRAM_BOT_TOKEN: ${APPLICATION_TELEGRAM_BOT_TOKEN}
+      SERVER_LOAD_BALANCER_URL: ${SERVER_LOAD_BALANCER_URL}
+    ports:
+      - 8080:80
+    networks:
+      - internal
+
+volumes:
+  db_data:
+
+networks:
+  internal:
+    driver: bridge

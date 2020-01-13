@@ -1,41 +1,47 @@
 const axios = require('axios')
 
-module.exports = class Api {
+class Api {
     constructor({ baseUrl }) {
-        this.axios = axios.create({
-            baseURL: baseUrl
+        this.client = axios.create({
+            baseURL: baseUrl,
         })
     }
 
-    findSongsByTitle(title, options = {}) {
-        return this.axios
-            .get('/songs/search/by-title', { params: { title, ...options } })
-            .then(res => res.data)
+    findSongsByTitle = async (title, options = {}) => {
+        const { data } = await this.client.get(
+            '/songs/search/by-title',
+            { params: { title, ...options } },
+        )
+        return data
     }
 
-    findSongsByPhrase(phrase, options = {}) {
-        return this.axios
-            .get('/songs/search/by-phrase', { params: { phrase, ...options } })
-            .then(res => res.data)
+    findSongsByPhrase = async (phrase, options = {}) => {
+        const { data } = await this.client.get(
+            '/songs/search/by-phrase',
+            { params: { phrase, ...options } },
+        )
+        return data
     }
 
-    getRandomSong() {
-        return this.axios.get('/songs/search/random')
-            .then(res => res.data)
+    getRandomSong = async () => {
+        const { data } = await this.client.get('/songs/search/random')
+        return data
     }
 
-    getSong(id) {
-        return this.axios.get(`/songs/${id}`)
-            .then(res => res.data)
+    getSong = async (id) => {
+        const { data } = await this.client.get(`/songs/${id}`)
+        return data
     }
 
-    getRandomQuote() {
-        return this.axios.get('/quotes/search/random')
-            .then(res => res.data)
+    getRandomQuote = async () => {
+        const { data } = await this.client.get('/quotes/search/random')
+        return data
     }
 
-    getRandomQuoteFromSong(songId) {
-        return this.axios.get(`/songs/${songId}/quotes/search/random`)
-            .then(res => res.data)
+    getRandomQuoteFromSong = async (songId) => {
+        const { data } = await this.client.get(`/songs/${songId}/quotes/search/random`)
+        return data
     }
 }
+
+module.exports = Api

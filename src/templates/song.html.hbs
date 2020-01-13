@@ -1,7 +1,7 @@
 <b>{{title}}</b>
 
-<b>Автор:</b> {{author}}
-<b>Альбом:</b> {{album}}
+<b>Автор:</b> {{#if author}}{{author}}{{else}}неизвестен{{/if}}
+<b>Альбом:</b> {{#if album}}{{album}}{{else}}неизвестен{{/if}}
 
 {{#each verses}}
 {{#each quotes}}
