@@ -24,7 +24,7 @@ const telegramSecretSeed = Date.now()
 const telegramController = new TelegramController({
     bot: new Bot({
         token: config.application.telegram.bot.token,
-        webhookUrl: `${config.server.loadBalancer.url}/api/telegram/updates${telegramSecretSeed}`,
+        webhookUrl: `${config.server.loadBalancer.url}/api/telegram/updates/${telegramSecretSeed}`,
         dependencies: {
             api: new Api({
                 baseUrl: config.application.api.baseUrl,
