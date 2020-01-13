@@ -16,8 +16,6 @@
 [license-image]: https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square
 [license-url]: https://github.com/linden-honey/linden-honey-bot/blob/master/LICENSE
 
-Telegram bot built on top of Linden Honey REST API
-
 ## Technologies
 
 - [Node](https://nodejs.org/)
