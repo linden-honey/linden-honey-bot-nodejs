@@ -1,7 +1,7 @@
 {
   "name": "linden-honey-bot",
-  "version": "1.1.7",
-  "description": "Telegram bot built on top of Linden Honey REST API",
+  "version": "1.1.8",
+  "description": "Telegram bot built on top of lyrics API",
   "main": "src/index.js",
   "scripts": {
     "start": "node src",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linden-honey/linden-honey-bot.git"
+    "url": "git+https://github.com/linden-honey/linden-honey-bot-nodejs.git"
   },
   "author": "Alexander Babai <aliaksandr.babai@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/linden-honey/linden-honey-bot/issues"
+    "url": "https://github.com/linden-honey/linden-honey-bot-nodejs/issues"
   },
-  "homepage": "https://github.com/linden-honey/linden-honey-bot#readme",
+  "homepage": "https://github.com/linden-honey/linden-honey-bot-nodejs#readme",
   "dependencies": {
     "axios": "^0.19.1",
     "express": "^4.17.1",
