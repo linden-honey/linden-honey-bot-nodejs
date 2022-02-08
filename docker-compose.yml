@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: lindenhoney/linden-honey-bot:latest
+    image: lindenhoney/linden-honey-bot-nodejs:latest
     build: .
     environment:
       APPLICATION_API_BASE_URL: ${APPLICATION_API_BASE_URL}
