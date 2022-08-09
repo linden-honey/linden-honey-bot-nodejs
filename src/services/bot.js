@@ -70,7 +70,7 @@ class Bot {
 
         this.telegraf.hears(/.*хуй.*/i, async (ctx) => {
             const { data } = await this.api.findSongsByTitle('Хуй')
-            const song = data && data[0]
+            const song = data && data.at(-1)
             if (song) {
                 const { phrase } = await this.api.getRandomQuoteFromSong(song.id)
                 ctx.reply(phrase, {
