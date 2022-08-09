@@ -9,6 +9,9 @@
     "test": "mocha src/**/*.spec.js",
     "lint": "eslint src"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linden-honey/linden-honey-bot-nodejs.git"
