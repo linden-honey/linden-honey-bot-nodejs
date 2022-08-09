@@ -9,6 +9,9 @@
     "test": "mocha src/**/*.spec.js",
     "lint": "eslint src"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linden-honey/linden-honey-bot-nodejs.git"
@@ -20,21 +23,22 @@
   },
   "homepage": "https://github.com/linden-honey/linden-honey-bot-nodejs#readme",
   "dependencies": {
-    "axios": "^0.19.1",
-    "express": "^4.17.1",
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
-    "handlebars": "^4.5.3",
-    "swagger-ui-express": "^4.1.2",
-    "telegraf": "^3.35.0"
+    "handlebars": "^4.7.7",
+    "swagger-ui-express": "^4.5.0",
+    "telegraf": "^4.8.5"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "chai": "^4.2.0",
-    "eslint": "^6.7.2",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "mocha": "^6.2.2",
-    "sinon": "^8.0.1",
-    "sinon-chai": "^3.4.0"
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
+    "chai": "^4.3.6",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "mocha": "^10.0.0",
+    "sinon": "^14.0.0",
+    "sinon-chai": "^3.7.0"
   }
 }
