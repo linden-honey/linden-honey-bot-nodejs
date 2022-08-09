@@ -68,6 +68,28 @@ class Bot {
         this.telegraf.command('lenin', leninMiddleware)
         this.telegraf.hears(/.*ленин.*/i, leninMiddleware)
 
+        this.telegraf.hears([/.*хуй.*/i], async (ctx) => ctx.reply('для пидоров', {
+            reply_to_message_id: ctx.message.message_id,
+        }))
+
+        this.telegraf.hears(/.*хуй.*/i, async (ctx) => {
+            const { data } = await this.api.findSongsByTitle('Хуй')
+            const song = data && data[0]
+            if (song) {
+                const { phrase } = await this.api.getRandomQuoteFromSong(song.id)
+                ctx.reply(phrase, {
+                    reply_to_message_id: ctx.message.message_id,
+                })
+            }
+        })
+
+        this.telegraf.hears([/.*крипт.*/i, /.*node.*/i, /.*js.*/i, /.*галера.*/i], async (ctx) => ctx.reply(
+            'для пидоров',
+            {
+                reply_to_message_id: ctx.message.message_id,
+            },
+        ))
+
         this.telegraf.command('say', async (ctx) => {
             const quote = await this.api.getRandomQuote()
             ctx.reply(quote.phrase)
