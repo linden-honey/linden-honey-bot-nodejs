@@ -1,4 +1,4 @@
-const debounceMiddleware = (seconds, middleware) => {
+const debounceMiddleware = (seconds, middleware, fallbackMiddleware) => {
     // userID => lastNotifiedAt
     const cache = new Map()
 
@@ -10,8 +10,17 @@ const debounceMiddleware = (seconds, middleware) => {
         if (secondsDelta === 0 || secondsDelta >= seconds) {
             cache.set(userId, currentTime)
             middleware(ctx, next)
+        } else if (fallbackMiddleware) {
+            fallbackMiddleware(ctx, next)
         }
     }
+}
+
+const replyWithRandomPhraseMiddleware = (phrases = []) => (ctx) => {
+    const randomPhrase = phrases[Math.floor((Math.random() * phrases.length))]
+    ctx.reply(randomPhrase, {
+        reply_to_message_id: ctx?.message?.message_id,
+    })
 }
 
 const replyWithRandomSongMiddleware = ({ api, templateEngine }) => async (ctx) => {
@@ -80,4 +89,5 @@ module.exports = {
     replyWithAllForPidorsMiddleware,
     replyWithApprovalMiddleware,
     replyWithDesiredStreetMiddleware,
+    replyWithRandomPhraseMiddleware,
 }
