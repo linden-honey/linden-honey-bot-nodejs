@@ -40,6 +40,7 @@ const replyWithRandomQuoteMiddleware = ({ api }) => async (ctx) => {
 }
 
 const replyWithRandomQuoteFromSongMiddleware = ({ title, replyToMessage, api }) => async (ctx) => {
+    console.log(`quote from song title=${title}`)
     const { data } = await api.findSongsByTitle(title)
     const song = data && data.at(-1)
     if (song) {
@@ -55,7 +56,9 @@ const replyWithRandomQuoteAboutDickMiddleware = ({ api, replyToMessage }) => rep
 const replyWithRandomQuoteAboutPussyMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Винтовка', replyToMessage, api })
 
 const replyWithAllForPidorsMiddleware = () => async (ctx) => {
-    const matchedWord = ctx?.match[0]
+    console.log('all for pidors')
+    console.log(JSON.stringify(ctx?.match))
+    const matchedWord = ctx?.match.at(0)
     const phrase = `${matchedWord} для пидоров.`
     ctx.reply(phrase, {
         reply_to_message_id: ctx?.message?.message_id,

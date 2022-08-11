@@ -121,7 +121,7 @@ const hearsPussy = ({ api }) => (bot) => {
 const ALL_FOR_PIDORS_PATTERN = [/.*крипт.*/i, /.*node.*/i, /.*js.*/i, /.*галера.*/i]
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
-        60 * 2, // 2 minutes
+        10, // 2 minutes
         replyWithAllForPidorsMiddleware,
     ))
 }
