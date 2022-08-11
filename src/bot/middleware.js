@@ -10,7 +10,7 @@ const debounceMiddleware = (seconds, middleware) => {
         console.log('DEBUG: debounce')
         console.log(`cache=${JSON.stringify(cache)}`)
         console.log(`currentTime=${currentTime} lastNotifiedAt=${lastNotifiedAt} secondsDelta=${secondsDelta}`)
-        if (secondsDelta >= seconds) {
+        if (secondsDelta === 0 || secondsDelta >= seconds) {
             cache.set(userId, currentTime)
             await middleware(ctx, next)
         }
