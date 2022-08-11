@@ -107,21 +107,21 @@ const hearsLenin = ({ api }) => (bot) => {
 
 const hearsDick = ({ api }) => (bot) => {
     bot.hears(/ху[йияё]/i, debounceMiddleware(
-        60 * 2, // 2 minutes
+        60 * 5, // 5 minutes
         replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
     ))
 }
 const hearsPussy = ({ api }) => (bot) => {
     bot.hears(/пизд[ауые]/i, debounceMiddleware(
-        60 * 2, // 2 minutes
+        60 * 5, // 5 minutes
         replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
     ))
 }
 
-const ALL_FOR_PIDORS_PATTERN = [/.*крипт.*/i, /.*node.*/i, /.*js.*/i, /.*галера.*/i]
+const ALL_FOR_PIDORS_PATTERN = /крипт\w*|\w*\.*js|фронт\w*|галер\w*|стартап\w*|с*пасиб[оа]*|получается|apple|дайсон|гамарджоба|побед\w*/i
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
-        10, // 2 minutes
+        60 * 5, // 5 minutes
         replyWithAllForPidorsMiddleware(),
     ))
 }
