@@ -102,17 +102,17 @@ const inlineQueryByPhrase = ({ api, templateEngine }) => (bot) => {
 // message based options
 
 const hearsLenin = ({ api }) => (bot) => {
-    bot.hears(/ленин/i, replyWithRandomQuoteAboutLeninMiddleware({ api }))
+    bot.hears(/ленин/ui, replyWithRandomQuoteAboutLeninMiddleware({ api }))
 }
 
 const hearsDick = ({ api }) => (bot) => {
-    bot.hears(/ху[йияё]/i, debounceMiddleware(
+    bot.hears(/ху[йияё]/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
     ))
 }
 const hearsPussy = ({ api }) => (bot) => {
-    bot.hears(/пизд[ауые]/i, debounceMiddleware(
+    bot.hears(/пизд[ауые]/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
     ))
