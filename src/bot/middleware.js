@@ -48,6 +48,27 @@ const replyWithAllForPidorsMiddleware = () => (ctx) => {
     })
 }
 
+const replyWithApprovalMiddleware = () => (ctx) => {
+    ctx.reply('Получается что так', {
+        reply_to_message_id: ctx?.message?.message_id,
+    })
+}
+
+const replyWithDesiredStreetMiddleware = () => (ctx) => {
+    const streets = [
+        'Щорса',
+        'Сабуртало',
+        'Шмидта',
+        'Блюхера',
+    ]
+    const username = `@${ctx?.from?.username}`
+    const randomStreet = streets[Math.floor((Math.random() * streets.length))]
+    const phrase = `Вот было бы словно, если бы ${username} на ${randomStreet} жил`
+    ctx.reply(phrase, {
+        reply_to_message_id: ctx?.message?.message_id,
+    })
+}
+
 module.exports = {
     debounceMiddleware,
     replyWithRandomSongMiddleware,
@@ -57,4 +78,6 @@ module.exports = {
     replyWithRandomQuoteAboutDickMiddleware,
     replyWithRandomQuoteAboutPussyMiddleware,
     replyWithAllForPidorsMiddleware,
+    replyWithApprovalMiddleware,
+    replyWithDesiredStreetMiddleware,
 }
