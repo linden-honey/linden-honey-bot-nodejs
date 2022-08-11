@@ -37,7 +37,6 @@ const replyWithRandomQuoteMiddleware = ({ api }) => async (ctx) => {
 }
 
 const replyWithRandomQuoteFromSongMiddleware = ({ title, replyToMessage, api }) => async (ctx) => {
-    console.log(`quote from song title=${title}`)
     const { data } = await api.findSongsByTitle(title)
     const song = data && data.at(-1)
     if (song) {

@@ -118,7 +118,7 @@ const hearsPussy = ({ api }) => (bot) => {
     ))
 }
 
-const ALL_FOR_PIDORS_PATTERN = /крипт\w*|\w*\.*js|фронт\w*|галер\w*|стартап\w*|с*пасиб[оа]*|получается|apple|дайсон|гамарджоба|побед\w*/i
+const ALL_FOR_PIDORS_PATTERN = /крипт\p{sc=Cyrillic}*|\w*\.*js|фронт|галер\p{sc=Cyrillic}*|стартап|с*пасиб[оа]*|получается|apple|дайсон|гамарджоба|побед\p{sc=Cyrillic}*/ui
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
         60 * 5, // 5 minutes
