@@ -7,6 +7,7 @@ const {
     replyWithAllForPidorsMiddleware,
     replyWithApprovalMiddleware,
     replyWithDesiredStreetMiddleware,
+    replyWithRefuseMiddleware,
 } = require('./middleware')
 
 // commands
@@ -111,12 +112,21 @@ const hearsDick = ({ api }) => (bot) => {
     bot.hears(/ху[йияё]/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
+        debounceMiddleware(
+            60 * 1, // 1 minute
+            replyWithRefuseMiddleware(),
+        ),
     ))
 }
+
 const hearsPussy = ({ api }) => (bot) => {
     bot.hears(/пизд[ауые]/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
+        debounceMiddleware(
+            60 * 1, // 1 minute
+            replyWithRefuseMiddleware(),
+        ),
     ))
 }
 

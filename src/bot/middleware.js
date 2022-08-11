@@ -78,6 +78,14 @@ const replyWithDesiredStreetMiddleware = () => (ctx) => {
     })
 }
 
+const replyWithRefuseMiddleware = () => replyWithRandomPhraseMiddleware([
+    'Отставить!',
+    'Не положено!',
+    'Ожидайте!',
+    'Я за ним занимал!',
+    'Потише!',
+])
+
 module.exports = {
     debounceMiddleware,
     replyWithRandomSongMiddleware,
@@ -90,4 +98,5 @@ module.exports = {
     replyWithApprovalMiddleware,
     replyWithDesiredStreetMiddleware,
     replyWithRandomPhraseMiddleware,
+    replyWithRefuseMiddleware,
 }
