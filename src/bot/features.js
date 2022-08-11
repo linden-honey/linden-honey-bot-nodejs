@@ -60,13 +60,13 @@ const sayCommand = ({ api }) => (bot) => {
 }
 
 const startCommand = () => (bot) => {
-    bot.command('start', async (ctx) => {
+    bot.command('start', (ctx) => {
         ctx.replyWithSticker('CAADAgAD0wQAAu75nwV1MhAIlGmvlwI')
     })
 }
 
 const stopCommand = () => (bot) => {
-    bot.command('stop', async (ctx) => {
+    bot.command('stop', (ctx) => {
         ctx.replyWithSticker('CAADAgADrwQAAu75nwWJzfxZULhKCQI')
     })
 }
@@ -122,7 +122,7 @@ const ALL_FOR_PIDORS_PATTERN = [/.*крипт.*/i, /.*node.*/i, /.*js.*/i, /.*г
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
         10, // 2 minutes
-        replyWithAllForPidorsMiddleware,
+        replyWithAllForPidorsMiddleware(),
     ))
 }
 
