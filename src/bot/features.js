@@ -74,7 +74,7 @@ const stopCommand = () => (bot) => {
 // inline query
 
 const inlineQueryByPhrase = ({ api, templateEngine }) => (bot) => {
-    bot.inlineQuery(async (ctx) => {
+    bot.on('inline_query', async (ctx) => {
         const limit = 20
         const offset = Number.parseInt(ctx.inlineQuery.offset, 10) || 0
         const { data } = await api.findSongsByPhrase(
