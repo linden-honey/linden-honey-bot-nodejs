@@ -71,7 +71,7 @@ const stopCommand = () => (bot) => {
     })
 }
 
-// inline query options
+// inline query
 
 const inlineQueryByPhrase = ({ api, templateEngine }) => (bot) => {
     bot.inlineQuery(async (ctx) => {
@@ -99,7 +99,7 @@ const inlineQueryByPhrase = ({ api, templateEngine }) => (bot) => {
     })
 }
 
-// message based options
+// messages
 
 const hearsLenin = ({ api }) => (bot) => {
     bot.hears(/ленин/ui, replyWithRandomQuoteAboutLeninMiddleware({ api }))
