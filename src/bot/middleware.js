@@ -14,17 +14,6 @@ const debounceMiddleware = (seconds, middleware) => {
     }
 }
 
-const replyMiddleware = (action, extra = {}) => async (ctx) => {
-    const res = await action(ctx)
-    if (res) {
-        const { replyToMessage, ...filteredExtra } = extra
-        ctx.reply(res, {
-            ...(replyToMessage && { reply_to_message_id: ctx?.message?.message_id }),
-            ...filteredExtra,
-        })
-    }
-}
-
 const replyWithRandomSongMiddleware = ({ api, templateEngine }) => async (ctx) => {
     const song = await api.getRandomSong()
     const html = await templateEngine.render('song.html', song)
@@ -61,7 +50,6 @@ const replyWithAllForPidorsMiddleware = () => (ctx) => {
 
 module.exports = {
     debounceMiddleware,
-    replyMiddleware,
     replyWithRandomSongMiddleware,
     replyWithRandomQuoteMiddleware,
     replyWithRandomQuoteFromSongMiddleware,
