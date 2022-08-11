@@ -42,7 +42,7 @@ const replyWithRandomQuoteAboutPussyMiddleware = ({ api, replyToMessage }) => re
 
 const replyWithAllForPidorsMiddleware = () => (ctx) => {
     const matchedWord = ctx?.match.at(0)
-    const phrase = `${matchedWord} для пидоров.`
+    const phrase = `${matchedWord} для пидоров`
     ctx.reply(phrase, {
         reply_to_message_id: ctx?.message?.message_id,
     })
