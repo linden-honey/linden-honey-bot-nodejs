@@ -7,9 +7,6 @@ const debounceMiddleware = (seconds, middleware) => {
         const currentTime = new Date().getTime()
         const lastNotifiedAt = cache.get(userId) ?? currentTime
         const secondsDelta = Math.round(Math.abs(currentTime - lastNotifiedAt) / 1000)
-        console.log('DEBUG: debounce')
-        console.log(`cache=${JSON.stringify(Object.fromEntries(cache.entries()))}`)
-        console.log(`currentTime=${currentTime} lastNotifiedAt=${lastNotifiedAt} secondsDelta=${secondsDelta}`)
         if (secondsDelta === 0 || secondsDelta >= seconds) {
             cache.set(userId, currentTime)
             middleware(ctx, next)
@@ -56,8 +53,6 @@ const replyWithRandomQuoteAboutDickMiddleware = ({ api, replyToMessage }) => rep
 const replyWithRandomQuoteAboutPussyMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Винтовка', replyToMessage, api })
 
 const replyWithAllForPidorsMiddleware = () => (ctx) => {
-    console.log('all for pidors')
-    console.log(JSON.stringify(ctx?.match))
     const matchedWord = ctx?.match.at(0)
     const phrase = `${matchedWord} для пидоров.`
     ctx.reply(phrase, {
