@@ -2,17 +2,17 @@ const debounceMiddleware = (seconds, middleware) => {
     // userID => lastNotifiedAt
     const cache = new Map()
 
-    return async (ctx, next) => {
+    return (ctx, next) => {
         const userId = ctx?.from?.id
         const currentTime = new Date().getTime()
         const lastNotifiedAt = cache.get(userId) ?? currentTime
         const secondsDelta = Math.round(Math.abs(currentTime - lastNotifiedAt) / 1000)
         console.log('DEBUG: debounce')
-        console.log(`cache=${JSON.stringify(cache)}`)
+        console.log(`cache=${JSON.stringify(Object.fromEntries(cache.entries()))}`)
         console.log(`currentTime=${currentTime} lastNotifiedAt=${lastNotifiedAt} secondsDelta=${secondsDelta}`)
         if (secondsDelta === 0 || secondsDelta >= seconds) {
             cache.set(userId, currentTime)
-            await middleware(ctx, next)
+            middleware(ctx, next)
         }
     }
 }
@@ -55,7 +55,7 @@ const replyWithRandomQuoteAboutLeninMiddleware = ({ api, replyToMessage }) => re
 const replyWithRandomQuoteAboutDickMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Хуй', replyToMessage, api })
 const replyWithRandomQuoteAboutPussyMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Винтовка', replyToMessage, api })
 
-const replyWithAllForPidorsMiddleware = () => async (ctx) => {
+const replyWithAllForPidorsMiddleware = () => (ctx) => {
     console.log('all for pidors')
     console.log(JSON.stringify(ctx?.match))
     const matchedWord = ctx?.match.at(0)
