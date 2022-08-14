@@ -1,3 +1,4 @@
+const { Telegraf } = require('telegraf')
 const express = require('express')
 require('express-async-errors')// patch to support promise rejection
 
@@ -5,49 +6,49 @@ const config = require('./utils/config')
 
 const {
     Api,
-    Bot,
     TemplateEngine,
 } = require('./services')
+
+const { features } = require('./bot')
 
 const {
     TelegramController,
 } = require('./controllers')
 
-const app = express()
+console.log('initializing services')
 
+const api = new Api({
+    baseUrl: config.application.api.baseUrl,
+})
+const templateEngine = new TemplateEngine()
+
+console.log('initializing telegram bot')
+
+const telegramBot = new Telegraf(config.application.telegram.bot.token)
+
+Object
+    .values(features)
+    .map((feature) => feature({ api, templateEngine }))
+    .forEach((feature) => feature(telegramBot))
+
+const telegramBotWebhookSecret = config.application.telegram.bot.webhookSecret
+telegramBot.telegram.setWebhook(`${config.server.loadBalancer.url}/api/telegram/updates/${telegramBotWebhookSecret}`)
+
+console.log('initializing http server')
+
+const app = express()
 const { Router } = express
 
-/**
- * Declare telegram routes
- */
-const telegramBotWebhookSecret = config.application.telegram.bot.webhookSecret
-const telegramController = new TelegramController({
-    bot: new Bot({
-        token: config.application.telegram.bot.token,
-        webhookUrl: `${config.server.loadBalancer.url}/api/telegram/updates/${telegramBotWebhookSecret}`,
-        dependencies: {
-            api: new Api({
-                baseUrl: config.application.api.baseUrl,
-            }),
-            templateEngine: new TemplateEngine(),
-        },
-    }),
-})
+const telegramController = new TelegramController({ bot: telegramBot })
 const telegramRouter = new Router()
     .post(`/updates/${telegramBotWebhookSecret}`, telegramController.handleUpdate)
 
-/**
- * Declare API routes
- */
 const apiRouter = new Router()
     .use(express.json())
     .use('/telegram', telegramRouter)
 
-/**
- * Apply routes
- */
 app.use(config.application.rest.basePath, apiRouter)
 
 app.listen(config.server.port, () => {
-    console.log(`Application is started on ${config.server.port} port!`)
+    console.log(`application started on ${config.server.port} port`)
 })
