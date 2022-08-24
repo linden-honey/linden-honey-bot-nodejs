@@ -115,7 +115,7 @@ const hearsLenin = ({ api }) => (bot) => {
 }
 
 const hearsDick = ({ api }) => (bot) => {
-    bot.hears(/\bхуй\b/ui, debounceMiddleware(
+    bot.hears(/хуй/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
         debounceMiddleware(
@@ -126,7 +126,7 @@ const hearsDick = ({ api }) => (bot) => {
 }
 
 const hearsPussy = ({ api }) => (bot) => {
-    bot.hears(/\bпизд[ауые]\b/ui, debounceMiddleware(
+    bot.hears(/пизд[ауы]/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
         debounceMiddleware(
