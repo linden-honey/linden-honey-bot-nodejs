@@ -10,6 +10,12 @@ const {
     replyWithRefuseMiddleware,
 } = require('./middleware')
 
+// filters
+
+const dropForwards = () => (bot) => {
+    bot.drop((ctx) => !!(ctx?.message?.forward_from || ctx?.message?.forward_from_chat))
+}
+
 // commands
 
 const anthemCommand = ({ api, templateEngine }) => (bot) => {
@@ -109,7 +115,7 @@ const hearsLenin = ({ api }) => (bot) => {
 }
 
 const hearsDick = ({ api }) => (bot) => {
-    bot.hears(/ху[йияё]/ui, debounceMiddleware(
+    bot.hears(/\bхуй\b/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
         debounceMiddleware(
@@ -120,7 +126,7 @@ const hearsDick = ({ api }) => (bot) => {
 }
 
 const hearsPussy = ({ api }) => (bot) => {
-    bot.hears(/пизд[ауые]/ui, debounceMiddleware(
+    bot.hears(/\bпизд[ауые]\b/ui, debounceMiddleware(
         60 * 5, // 5 minutes
         replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
         debounceMiddleware(
@@ -130,7 +136,7 @@ const hearsPussy = ({ api }) => (bot) => {
     ))
 }
 
-const ALL_FOR_PIDORS_PATTERN = /крипт\p{sc=Cyrillic}*|\w*\.*js|фронт|галер\p{sc=Cyrillic}*|стартап|с*пасиб[оа]*|apple|дайсон|гамарджоба|побед\p{sc=Cyrillic}*/ui
+const ALL_FOR_PIDORS_PATTERN = /крипта|\w*\.*js|фронт|галер[аы]|стартап|с*пасиб[оа]*|apple|macbook|макбук|dyson|дайсон|гамарджоба|победа/ui
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
         60 * 5, // 5 minutes
@@ -142,6 +148,10 @@ const hearsSpecialWords = () => (bot) => {
     bot.hears(/получается/ui, debounceMiddleware(
         60 * 2, // 2 minutes
         replyWithApprovalMiddleware(),
+        debounceMiddleware(
+            60 * 1, // 1 minute
+            replyWithRefuseMiddleware(),
+        ),
     ))
 
     bot.hears(/славно/ui, debounceMiddleware(
@@ -151,6 +161,7 @@ const hearsSpecialWords = () => (bot) => {
 }
 
 module.exports = {
+    dropForwards,
     anthemCommand,
     helpCommand,
     leninCommand,

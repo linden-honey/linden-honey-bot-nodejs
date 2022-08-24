@@ -65,14 +65,17 @@ const replyWithApprovalMiddleware = () => (ctx) => {
 
 const replyWithDesiredStreetMiddleware = () => (ctx) => {
     const streets = [
-        'Щорса',
-        'Сабуртало',
-        'Шмидта',
-        'Блюхера',
+        'на Щорса',
+        'на Сабуртало',
+        'на Шмидта',
+        'на Блюхера',
+        'на Белых Росах',
+        'в Вертилишках',
+        'в Путришках',
     ]
     const username = `@${ctx?.from?.username}`
     const randomStreet = streets[Math.floor((Math.random() * streets.length))]
-    const phrase = `Вот было бы словно, если бы ${username} на ${randomStreet} жил`
+    const phrase = `Вот было бы словно, если бы ${username} ${randomStreet} жил`
     ctx.reply(phrase, {
         reply_to_message_id: ctx?.message?.message_id,
     })
@@ -84,6 +87,7 @@ const replyWithRefuseMiddleware = () => replyWithRandomPhraseMiddleware([
     'Ожидайте!',
     'Я за ним занимал!',
     'Потише!',
+    'Э!',
 ])
 
 module.exports = {
