@@ -46,8 +46,6 @@ const replyWithRandomQuoteFromSongMiddleware = ({ title, replyToMessage, api }) 
 }
 
 const replyWithRandomQuoteAboutLeninMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Песня о Ленине', replyToMessage, api })
-const replyWithRandomQuoteAboutDickMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Хуй', replyToMessage, api })
-const replyWithRandomQuoteAboutPussyMiddleware = ({ api, replyToMessage }) => replyWithRandomQuoteFromSongMiddleware({ title: 'Всё летит в пизду', replyToMessage, api })
 
 const replyWithAllForPidorsMiddleware = () => (ctx) => {
     const matchedWord = ctx?.match.at(0)
@@ -96,8 +94,6 @@ module.exports = {
     replyWithRandomQuoteMiddleware,
     replyWithRandomQuoteFromSongMiddleware,
     replyWithRandomQuoteAboutLeninMiddleware,
-    replyWithRandomQuoteAboutDickMiddleware,
-    replyWithRandomQuoteAboutPussyMiddleware,
     replyWithAllForPidorsMiddleware,
     replyWithApprovalMiddleware,
     replyWithDesiredStreetMiddleware,

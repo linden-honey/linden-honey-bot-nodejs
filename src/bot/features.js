@@ -2,8 +2,6 @@ const {
     debounceMiddleware,
     replyWithRandomSongMiddleware,
     replyWithRandomQuoteAboutLeninMiddleware,
-    replyWithRandomQuoteAboutDickMiddleware,
-    replyWithRandomQuoteAboutPussyMiddleware,
     replyWithAllForPidorsMiddleware,
     replyWithApprovalMiddleware,
     replyWithDesiredStreetMiddleware,
@@ -114,28 +112,6 @@ const hearsLenin = ({ api }) => (bot) => {
     bot.hears(/ленин/ui, replyWithRandomQuoteAboutLeninMiddleware({ api }))
 }
 
-const hearsDick = ({ api }) => (bot) => {
-    bot.hears(/хуй/ui, debounceMiddleware(
-        60 * 5, // 5 minutes
-        replyWithRandomQuoteAboutDickMiddleware({ api, replyToMessage: true }),
-        debounceMiddleware(
-            60 * 1, // 1 minute
-            replyWithRefuseMiddleware(),
-        ),
-    ))
-}
-
-const hearsPussy = ({ api }) => (bot) => {
-    bot.hears(/пизд[ауы]/ui, debounceMiddleware(
-        60 * 5, // 5 minutes
-        replyWithRandomQuoteAboutPussyMiddleware({ api, replyToMessage: true }),
-        debounceMiddleware(
-            60 * 1, // 1 minute
-            replyWithRefuseMiddleware(),
-        ),
-    ))
-}
-
 const ALL_FOR_PIDORS_PATTERN = /крипта|\w*\.*js|фронт|галер[аы]|стартап|с*пасиб[оа]*|apple|macbook|макбук|dyson|дайсон|гамарджоба|победа/ui
 const hearsAllForPidors = () => (bot) => {
     bot.hears(ALL_FOR_PIDORS_PATTERN, debounceMiddleware(
@@ -170,8 +146,6 @@ module.exports = {
     stopCommand,
     inlineQueryByPhrase,
     hearsLenin,
-    hearsDick,
-    hearsPussy,
     hearsAllForPidors,
     hearsSpecialWords,
 }
